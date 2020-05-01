@@ -32,7 +32,9 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 	
 	@Override
 	public void createParkingLot(int size) {
-		parkingLot.setCapacity(size);
+// TODO: this is a hack
+//		parkingLot.setCapacity(size);
+		parkingLot = new ParkingLot(size);  	// parkingLot should be injected?    also need a DAO layer?
 	}
 
 	@Override

@@ -1,11 +1,16 @@
 package com.stephen.parkinglot.controllers;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stephen.parkinglot.commands.FileProcessor;
 import com.stephen.parkinglot.exceptions.ParkingLotException;
 import com.stephen.parkinglot.model.ParkingLot;
 import com.stephen.parkinglot.services.ParkingLotService;
@@ -19,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class ParkingLotController {
 
 	private final ParkingLotService parkingLotService;
+	private final FileProcessor fileProcessor;
 	
 	@GetMapping("status")
 	public String getStatus() {
@@ -41,6 +47,15 @@ public class ParkingLotController {
 		return parkingLotService.removeCar(registrationNumber, time);
 	}
 
+//	@GetMapping(path = "readFile/{filePath}")
+	@GetMapping(path = "readFile")
+	public String readFile(@RequestParam("filePath") String filePath ) throws ParkingLotException {
+//		Path path = Paths.get("d:\\parkinglot1.txt");
+
+		return fileProcessor.processParkingLotFile( Paths.get(filePath) );
+	}
+
+	
 	@RequestMapping(value = { "/", " ", "index" })
 	public String index() {
 		return " Welcome to the Parking Lot ";

@@ -29,7 +29,8 @@ public class FileProcessor {
 			
 			for(String line: lines) {
 				String[] array = line.split(" ", 2);
-				output.append(  processor.process(array[0], array[1], parkingLotService) );
+				String args = array.length > 1 ? array[1] : "";
+				output.append(  processor.process(array[0], args, parkingLotService) );
 				output.append( '\n' );
 			}
 			
@@ -39,8 +40,5 @@ System.out.println(output);	 // DEBUG
 		} catch (IOException e) {
 			throw new ParkingLotException("IOException while reading file " + filePath.toString(), e);
 		}
-		
-		
-		return "hello";
 	}
 }

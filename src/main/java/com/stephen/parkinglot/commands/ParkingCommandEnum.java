@@ -8,7 +8,7 @@ Commands
 ● Print status of parking slot : status
 */
 
-public enum ParkingCommand {
+public enum ParkingCommandEnum {
 	CREATE_PARKING_LOT("create_parking_lot"),
 	PARK("park"),
 	LEAVE("leave"),
@@ -16,7 +16,7 @@ public enum ParkingCommand {
 	
 	private final String commandLabel;
 	
-	private ParkingCommand(String commandLabel) {
+	private ParkingCommandEnum(String commandLabel) {
 		this.commandLabel = commandLabel;
 	}
 	
