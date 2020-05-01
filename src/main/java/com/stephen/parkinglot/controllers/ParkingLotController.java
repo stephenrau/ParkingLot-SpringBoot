@@ -37,7 +37,7 @@ public class ParkingLotController {
 	
 	@GetMapping(path = "leave/{registrationNumber}/{hours}")
 	public ParkingLot.CarTicket removeCar(@PathVariable("registrationNumber") String registrationNumber,
-								@PathVariable("hours") int time) throws ParkingLotException {
+								@PathVariable("hours") float time) throws ParkingLotException {
 		return parkingLotService.removeCar(registrationNumber, time);
 	}
 

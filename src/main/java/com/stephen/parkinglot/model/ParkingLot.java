@@ -67,7 +67,9 @@ System.out.println(mapUsedSpaces);   //debugging
 		if (getUsedCapacity() >= capacity) {
 			return PARKING_LOT_FULL_CODE;
 		}
+		
 		int slotId = getFirstFreeSlot();
+		
 		CarTicket ticket = new CarTicket(slotId, registrationNumber);
 		mapUsedSpaces.put(slotId, ticket);
 		
@@ -75,7 +77,7 @@ System.out.println(mapUsedSpaces);   //debugging
 	}
 	
 	// TODO: add different payment models / cost processors
-	private static float computeCost(int numberHours) {
+	private static float computeCost(float numberHours) {
 		final float first_2hours_cost = 10;
 		final float cost_per_hour = 10;
 		
@@ -87,7 +89,7 @@ System.out.println(mapUsedSpaces);   //debugging
 	}
 	
 	// @return computed cost of parking
-	public CarTicket removeCar(String registrationNumber, int numHours) throws ParkingLotException {
+	public CarTicket removeCar(String registrationNumber, float numHours) throws ParkingLotException {
 		CarTicket carTicket =  
 					mapUsedSpaces.values()
 					.stream()
@@ -95,8 +97,10 @@ System.out.println(mapUsedSpaces);   //debugging
 					.findFirst()
 					.orElseThrow( ()->new ParkingLotException("Registration number not found: " + registrationNumber));
 		
+		carTicket.setParkingTime_Hours(numHours);
 		float cost = computeCost(numHours);
 		carTicket.setCost(cost);
+		
 		
 		int slotId = carTicket.getSlotId();
 		mapUsedSpaces.remove(slotId);
@@ -108,7 +112,7 @@ System.out.println(mapUsedSpaces);   //debugging
 	public static class CarTicket {
 		@NonNull private Integer slotId;
 		@NonNull private String registrationNumber;
-		private float parkingTime_Minutes;	// amount of hours parked, not storing the start time for now
+		private float parkingTime_Hours;	// amount of hours parked, not storing the start time for now
 		private float cost; 
 		
 //		public CarTicket(Integer slotId, String registrationNumber) {

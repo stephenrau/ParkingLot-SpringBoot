@@ -41,7 +41,8 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 	}
 
 	@Override
-	public ParkingLot.CarTicket removeCar(String registrationNumber, int hoursParked) throws ParkingLotException {
+	public ParkingLot.CarTicket removeCar(String registrationNumber, float hoursParked) 
+			throws ParkingLotException {
 			return parkingLot.removeCar(registrationNumber, hoursParked);
 	}
 

@@ -11,7 +11,7 @@ public interface ParkingLotService {
 	int parkCar(String registrationNumber);
 	
 	// @return cost for parking
-	ParkingLot.CarTicket removeCar(String registrationNumber, int hoursParked) throws ParkingLotException;
+	ParkingLot.CarTicket removeCar(String registrationNumber, float hoursParked) throws ParkingLotException;
 	
 	String getStatus();
 }
