@@ -1,7 +1,6 @@
 package com.stephen.parkinglot.services;
 
-import org.springframework.stereotype.Service;
-
+import com.stephen.parkinglot.exceptions.ParkingLotException;
 import com.stephen.parkinglot.model.ParkingLot;
 
 public interface ParkingLotService {
@@ -11,7 +10,8 @@ public interface ParkingLotService {
 	// @return slotId
 	int parkCar(String registrationNumber);
 	
-	void removeCar(String registrationNumber, int hoursParked);
+	// @return cost for parking
+	ParkingLot.CarTicket removeCar(String registrationNumber, int hoursParked) throws ParkingLotException;
 	
 	String getStatus();
 }

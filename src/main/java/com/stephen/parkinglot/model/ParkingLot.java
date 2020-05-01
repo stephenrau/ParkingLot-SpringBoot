@@ -16,7 +16,7 @@ public class ParkingLot {
 
 	public static final int PARKING_LOT_FULL_CODE = -1;
 	
-	@NonNull private final Integer capacity;		// total number of parking spaces
+	@NonNull private Integer capacity;		// total number of parking spaces
 	private final Map<Integer, CarTicket> mapUsedSpaces;	 // {key,value} -> {slotId, car info}
 	
 	// TODO: fix this
@@ -87,7 +87,7 @@ System.out.println(mapUsedSpaces);   //debugging
 	}
 	
 	// @return computed cost of parking
-	public float removeCar(String registrationNumber, int numHours) throws ParkingLotException {
+	public CarTicket removeCar(String registrationNumber, int numHours) throws ParkingLotException {
 		CarTicket carTicket =  
 					mapUsedSpaces.values()
 					.stream()
@@ -98,15 +98,14 @@ System.out.println(mapUsedSpaces);   //debugging
 		float cost = computeCost(numHours);
 		carTicket.setCost(cost);
 		
-		return cost;
-	}
-	
-	private static void testStuff() {
-		CarTicket c1 = new CarTicket(1,"xyz");
+		int slotId = carTicket.getSlotId();
+		mapUsedSpaces.remove(slotId);
+		
+		return carTicket;
 	}
 	
 	@Data
-	private static class CarTicket {
+	public static class CarTicket {
 		@NonNull private Integer slotId;
 		@NonNull private String registrationNumber;
 		private float parkingTime_Minutes;	// amount of hours parked, not storing the start time for now
@@ -118,5 +117,8 @@ System.out.println(mapUsedSpaces);   //debugging
 //		}
 	}
 	
+	private static void testStuff() {
+		CarTicket c1 = new CarTicket(1,"xyz");
+	}
 	
 }
